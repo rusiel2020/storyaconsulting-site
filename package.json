@@ -1,0 +1,19 @@
+{
+  "name": "storyaconsulting-site",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.2.9",
+    "@fontsource-variable/source-serif-4": "^5.2.9",
+    "astro": "^6.1.10"
+  }
+}
