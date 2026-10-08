@@ -1,0 +1,105 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/source-serif-4';
+import '../styles/site.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  noindex?: boolean;
+}
+
+const { title, description, path = '/', noindex = false } = Astro.props;
+const canonical = new URL(path, 'https://storyaconsulting.com').href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <script is:inline>
+      try {
+        var saved = localStorage.getItem('storya-theme');
+        if (saved === 'dark' || saved === 'light') document.documentElement.setAttribute('data-theme', saved);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="masthead">
+        <div class="masthead__top">
+          <div class="masthead__identity">
+            <div class="masthead__portraits">
+              <span class="portrait"><img src="/paolo-danese.jpg" alt="Paolo Danese" width="52" height="52" /></span>
+              <span class="portrait"><img src="/rafael-soriano.jpg" alt="Rafael Soriano" width="52" height="52" /></span>
+            </div>
+            <div>
+              <p class="masthead__wordmark"><a href="/" style="border:0">Storya Consulting</a></p>
+              <p class="masthead__byline">Paolo Danese &amp; Rafael Soriano · Singapore</p>
+            </div>
+          </div>
+          <button class="theme-toggle" type="button" aria-label="Switch between light and dark mode">
+            <span class="theme-toggle__label">Dark mode</span>
+          </button>
+        </div>
+        <hr class="rule-draw" aria-hidden="true" />
+      </header>
+
+      <slot />
+
+      <footer class="foot">
+        <div class="foot__row">
+          <p>
+            Storya Consulting · Singapore · 2026 ·
+            <a href="mailto:paolo@storyaconsulting.com">paolo@storyaconsulting.com</a> ·
+            <a href="/privacy">Privacy notice</a>
+          </p>
+          <p>
+            <a href="https://www.linkedin.com/company/storyaconsulting" target="_blank" rel="noopener">Storya Consulting on LinkedIn</a> ·
+            <a href="https://www.linkedin.com/in/paolodanese/" target="_blank" rel="me noopener">Paolo on LinkedIn</a> ·
+            <a href="https://www.linkedin.com/in/rafaelpsorianomba/" target="_blank" rel="noopener">Rafael on LinkedIn</a>
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+        function isDark() {
+          var t = root.getAttribute('data-theme');
+          if (t) return t === 'dark';
+          return !!(mq && mq.matches);
+        }
+        function sync() {
+          document.querySelectorAll('.theme-toggle__label').forEach(function (el) {
+            el.textContent = isDark() ? 'Light mode' : 'Dark mode';
+          });
+        }
+        document.querySelectorAll('.theme-toggle').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var next = isDark() ? 'light' : 'dark';
+            root.setAttribute('data-theme', next);
+            try { localStorage.setItem('storya-theme', next); } catch (e) {}
+            sync();
+          });
+        });
+        if (mq && mq.addEventListener) mq.addEventListener('change', sync);
+        sync();
+      })();
+    </script>
+  </body>
+</html>

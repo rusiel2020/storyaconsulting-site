@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Tell us what stalled | Storya Consulting" description="Five questions about where AI stalled in your team. A person at Storya Consulting reads every answer and writes back within one working day." path="/start">
+<div class="pagehead">
+    <p class="eyebrow">Before we talk</p>
+    <h1>Tell us <em>what stalled.</em></h1>
+    <div class="prose"><p>Five questions, about four minutes. We read every answer ourselves, and one of us writes back. If a workflow review looks worth your time, we'll say what we would look at first. If it doesn't, we'll say that instead.</p></div>
+  </div>
+
+  <form id="start-form" class="formwrap" method="post" action="/api/start">
+    <p class="form-error" id="form-error" role="alert" hidden></p>
+    <div class="hp" aria-hidden="true"><label for="f-website">Leave this field empty</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+    <fieldset class="fieldset">
+      <legend><span class="qnum">1</span>Which best describes you?</legend>
+      <label class="opt"><input type="radio" name="q1" value="agency" required> PR or communications agency</label>
+      <label class="opt"><input type="radio" name="q1" value="inhouse"> In-house communications team (bank, asset manager, corporate)</label>
+      <label class="opt"><input type="radio" name="q1" value="publisher"> Publisher or publishing services</label>
+      <label class="opt"><input type="radio" name="q1" value="other"> Something else</label>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend><span class="qnum">2</span>Where are you with AI today?</legend>
+      <label class="opt"><input type="radio" name="q2" value="none" required> We haven't started</label>
+      <label class="opt"><input type="radio" name="q2" value="licences"> We bought licences and few people use them</label>
+      <label class="opt"><input type="radio" name="q2" value="solo"> A few people use it on their own</label>
+      <label class="opt"><input type="radio" name="q2" value="built"> Someone senior built a tool that works, and now they maintain it</label>
+      <label class="opt"><input type="radio" name="q2" value="several"> Several tools run in the team's daily work</label>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend><span class="qnum">3</span>Which work eats the hours before the paid work starts? Choose any.</legend>
+      <label class="opt"><input type="checkbox" name="q3" value="monitoring"> Daily monitoring and briefings</label>
+      <label class="opt"><input type="checkbox" name="q3" value="coverage"> Coverage reports</label>
+      <label class="opt"><input type="checkbox" name="q3" value="drafting"> Drafting releases and Q&amp;A</label>
+      <label class="opt"><input type="checkbox" name="q3" value="style"> Style and house-rule checks</label>
+      <label class="opt"><input type="checkbox" name="q3" value="research"> Research and account handover</label>
+      <label class="opt"><input type="checkbox" name="q3" value="other"> Something else</label>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend><span class="qnum">4</span>When you tried something with AI and it didn't stick, what was the actual reason?</legend>
+      <label class="opt"><input type="radio" name="q4" value="people" required> People: habits, directors, nobody wanted it</label>
+      <label class="opt"><input type="radio" name="q4" value="quality"> The output wasn't good enough</label>
+      <label class="opt"><input type="radio" name="q4" value="confidentiality"> Client confidentiality, or no clear rule on what can go in</label>
+      <label class="opt"><input type="radio" name="q4" value="it"> IT or security blocked it</label>
+      <label class="opt"><input type="radio" name="q4" value="owner"> Nobody owned it once it was live</label>
+      <label class="opt"><input type="radio" name="q4" value="untried"> We haven't tried anything yet</label>
+      <div class="field" style="margin-top:.9rem">
+        <label for="q4-text">In your words (optional)</label>
+        <textarea id="q4-text" name="q4text"></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend><span class="qnum">5</span>Who decides whether the firm tries something new?</legend>
+      <label class="opt"><input type="radio" name="q5" value="me" required> I do</label>
+      <label class="opt"><input type="radio" name="q5" value="directors"> My directors or partners</label>
+      <label class="opt"><input type="radio" name="q5" value="hq"> Regional or head office</label>
+      <label class="opt"><input type="radio" name="q5" value="unsure"> Not sure</label>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend>Where should we reply?</legend>
+      <div class="fgrid">
+        <div class="field"><label for="f-name">Name</label><input type="text" id="f-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-email">Work email</label><input type="email" id="f-email" name="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-company">Company</label><input type="text" id="f-company" name="company" autocomplete="organization" required></div>
+        <div class="field"><label for="f-role">Role (optional)</label><input type="text" id="f-role" name="role" autocomplete="organization-title"></div>
+      </div>
+      <div class="field">
+        <label for="f-dumb">A dumb question you'd like answered on the series (optional)</label>
+        <textarea id="f-dumb" name="dumb"></textarea>
+        <span class="hint">We may use it in an episode. We won't use your name or your firm's.</span>
+      </div>
+
+      <div class="consent">
+        <p style="margin-top:0">We use your details only to reply to you, as set out in the <a href="/privacy">privacy notice</a>.</p>
+        <p>Your answers go to Paolo and Rafael. They are not pasted into a public AI tool.</p>
+      </div>
+    </fieldset>
+
+    <div class="formfoot">
+      <button type="submit" class="btn">Send my answers</button>
+      <span>We reply within one working day.</span>
+    </div>
+  </form>
+  <script is:inline>
+    (function () {
+      var e = new URLSearchParams(location.search).get('error');
+      var box = document.getElementById('form-error');
+      if (!box || !e) return;
+      box.textContent = e === 'send'
+        ? "We couldn't send your answers. Please email paolo@storyaconsulting.com instead."
+        : 'Some required answers are missing. Check the questions below and try again.';
+      box.hidden = false;
+    })();
+  </script>
+</Base>

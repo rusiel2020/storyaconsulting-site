@@ -1,5 +1,15 @@
 {
   "name": "storyaconsulting-site",
+  "main": "worker/index.js",
   "compatibility_date": "2026-05-01",
-  "assets": { "directory": "./dist" }
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "MAIL_TO": "paolo@storyaconsulting.com",
+    "SMTP_HOST": "smtp.zoho.com",
+    "SMTP_PORT": "465"
+  }
 }
