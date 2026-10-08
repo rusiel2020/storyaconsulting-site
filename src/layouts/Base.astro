@@ -8,10 +8,13 @@ interface Props {
   description: string;
   path?: string;
   noindex?: boolean;
+  image?: string;
+  imageAlt?: string;
 }
 
-const { title, description, path = '/', noindex = false } = Astro.props;
+const { title, description, path = '/', noindex = false, image = '/og.png', imageAlt = 'Storya Consulting. AI your team still uses a month later.' } = Astro.props;
 const canonical = new URL(path, 'https://storyaconsulting.com').href;
+const imageUrl = new URL(image, 'https://storyaconsulting.com').href;
 ---
 
 <!doctype html>
@@ -27,7 +30,17 @@ const canonical = new URL(path, 'https://storyaconsulting.com').href;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonical} />
     <script is:inline>
       try {
@@ -41,18 +54,23 @@ const canonical = new URL(path, 'https://storyaconsulting.com').href;
       <header class="masthead">
         <div class="masthead__top">
           <div class="masthead__identity">
+            <a class="masthead__markwrap" href="/" aria-label="Storya Consulting home">
+              <img class="masthead__mark" src="/logo-mark.png" alt="" width="36" height="44" />
+            </a>
+            <div>
+              <p class="masthead__wordmark"><a href="/" style="border:0">Storya <span class="wm-accent">Consulting</span></a></p>
+              <p class="masthead__byline">Paolo Danese &amp; Rafael Soriano · Singapore</p>
+            </div>
+          </div>
+          <div class="masthead__right">
             <div class="masthead__portraits">
               <span class="portrait"><img src="/paolo-danese.jpg" alt="Paolo Danese" width="52" height="52" /></span>
               <span class="portrait"><img src="/rafael-soriano.jpg" alt="Rafael Soriano" width="52" height="52" /></span>
             </div>
-            <div>
-              <p class="masthead__wordmark"><a href="/" style="border:0">Storya Consulting</a></p>
-              <p class="masthead__byline">Paolo Danese &amp; Rafael Soriano · Singapore</p>
-            </div>
+            <button class="theme-toggle" type="button" aria-label="Switch between light and dark mode">
+              <span class="theme-toggle__label">Dark mode</span>
+            </button>
           </div>
-          <button class="theme-toggle" type="button" aria-label="Switch between light and dark mode">
-            <span class="theme-toggle__label">Dark mode</span>
-          </button>
         </div>
         <hr class="rule-draw" aria-hidden="true" />
       </header>

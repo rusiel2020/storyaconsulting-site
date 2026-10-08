@@ -545,3 +545,14 @@ td:first-child { font-weight: 600; width: 26%; }
   .fgrid { grid-template-columns: 1fr; }
   section { padding-block: 3.2rem; }
 }
+
+/* Logo mark in the header */
+.masthead__markwrap { display: block; border: 0; flex: none; line-height: 0; }
+.masthead__mark { display: block; height: 44px; width: auto; }
+.masthead__right { display: flex; align-items: center; gap: 1.1rem; }
+.wm-accent { color: var(--accent); }
+.masthead__identity { gap: 1.1rem; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .masthead__mark { filter: brightness(1.5) saturate(.85); }
+}
+:root[data-theme="dark"] .masthead__mark { filter: brightness(1.5) saturate(.85); }
