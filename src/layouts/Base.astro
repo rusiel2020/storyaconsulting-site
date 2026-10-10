@@ -12,7 +12,7 @@ interface Props {
   imageAlt?: string;
 }
 
-const { title, description, path = '/', noindex = false, image = '/og.png', imageAlt = 'Storya Consulting. AI your team still uses a month later.' } = Astro.props;
+const { title, description, path = '/', noindex = false, image = '/og.png', imageAlt = 'StoryaConsulting. AI your team still uses a month later.' } = Astro.props;
 const canonical = new URL(path, 'https://storyaconsulting.com').href;
 const imageUrl = new URL(image, 'https://storyaconsulting.com').href;
 ---
@@ -54,11 +54,11 @@ const imageUrl = new URL(image, 'https://storyaconsulting.com').href;
       <header class="masthead">
         <div class="masthead__top">
           <div class="masthead__identity">
-            <a class="masthead__markwrap" href="/" aria-label="Storya Consulting home">
+            <a class="masthead__markwrap" href="/" aria-label="StoryaConsulting home">
               <img class="masthead__mark" src="/logo-mark.png" alt="" width="36" height="44" />
             </a>
             <div>
-              <p class="masthead__wordmark"><a href="/" style="border:0">Storya <span class="wm-accent">Consulting</span></a></p>
+              <p class="masthead__wordmark"><a href="/" style="border:0">Storya<span class="wm-accent">Consulting</span></a></p>
               <p class="masthead__byline">Paolo Danese &amp; Rafael Soriano · Singapore</p>
             </div>
           </div>
@@ -80,12 +80,12 @@ const imageUrl = new URL(image, 'https://storyaconsulting.com').href;
       <footer class="foot">
         <div class="foot__row">
           <p>
-            Storya Consulting · Singapore · 2026 ·
+            StoryaConsulting · Singapore · 2026 ·
             <a href="mailto:paolo@storyaconsulting.com">paolo@storyaconsulting.com</a> ·
             <a href="/privacy">Privacy notice</a>
           </p>
           <p>
-            <a href="https://www.linkedin.com/company/storyaconsulting" target="_blank" rel="noopener">Storya Consulting on LinkedIn</a> ·
+            <a href="https://www.linkedin.com/company/storyaconsulting" target="_blank" rel="noopener">StoryaConsulting on LinkedIn</a> ·
             <a href="https://www.linkedin.com/in/paolodanese/" target="_blank" rel="me noopener">Paolo on LinkedIn</a> ·
             <a href="https://www.linkedin.com/in/rafaelpsorianomba/" target="_blank" rel="noopener">Rafael on LinkedIn</a>
           </p>
