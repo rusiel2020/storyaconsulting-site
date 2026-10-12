@@ -91,7 +91,7 @@ after(() => server.close());
 beforeEach(() => { mails = []; creds = {}; failAuth = false; });
 
 test('a valid submission is emailed to Paolo and redirects to thanks', async () => {
-  const res = await handleStart(post({ ...valid(), role: 'Head of Comms', q4text: 'Directors never opened it' }, { extra: [['q3', 'monitoring'], ['q3', 'coverage']] }), env(), { connect });
+  const res = await handleStart(post({ ...valid(), role: 'Head of Comms', q4text: 'Directors never opened it', q6text: 'Draft the daily briefing for me' }, { extra: [['q3', 'monitoring'], ['q3', 'coverage']] }), env(), { connect });
   assert.equal(res.status, 303);
   assert.equal(location(res), '/start/thanks');
   assert.equal(mails.length, 1);
@@ -108,6 +108,7 @@ test('a valid submission is emailed to Paolo and redirects to thanks', async () 
   assert.match(body, /Head of Comms/);
   assert.match(body, /Daily monitoring and briefings; Coverage reports/);
   assert.match(body, /Someone senior built a tool that works/);
+  assert.match(body, /6\. In a perfect world.*Draft the daily briefing for me/);
   assert.match(body, /Directors never opened it/);
 });
 

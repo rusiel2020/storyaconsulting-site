@@ -76,6 +76,7 @@ export async function handleStart(request, env, { connect }) {
   const company = oneLine(text(form, 'company', 200));
   const role = oneLine(text(form, 'role', 200));
   const q4text = text(form, 'q4text', 2000);
+  const q6text = text(form, 'q6text', 2000);
   const dumb = text(form, 'dumb', 2000);
 
   const valid =
@@ -103,6 +104,7 @@ export async function handleStart(request, env, { connect }) {
     `4. Why it didn't stick: ${Q4[q4]}`,
     `   In their words: ${q4text || '(nothing added)'}`,
     `5. Who decides: ${Q5[q5]}`,
+    `6. In a perfect world, what they'd want AI to do: ${q6text || '(nothing added)'}`,
     '',
     `A dumb question for the series: ${dumb || '(none)'}`,
     '',

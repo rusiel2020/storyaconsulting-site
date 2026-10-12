@@ -2,11 +2,11 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Tell us what stalled | StoryaConsulting" description="Five questions about where AI stalled in your team. A person at StoryaConsulting reads every answer and writes back within one working day." path="/start/" image="/og-start.png" imageAlt="Tell us what stalled. Five questions, about four minutes. StoryaConsulting.">
+<Base title="Tell us what stalled | StoryaConsulting" description="Six questions about where AI stalled in your team. A person at StoryaConsulting reads every answer and writes back within one working day." path="/start/" image="/og-start.png" imageAlt="Tell us what stalled. Six questions, about five minutes. StoryaConsulting.">
 <div class="pagehead">
     <p class="eyebrow">Before we talk</p>
     <h1>Tell us <em>what stalled.</em></h1>
-    <div class="prose"><p>Five questions, about four minutes. We read every answer ourselves, and one of us writes back. If a workflow review looks worth your time, we'll say what we would look at first. If it doesn't, we'll say that instead.</p></div>
+    <div class="prose"><p>Six questions, about five minutes. We read every answer ourselves, and one of us writes back. If a workflow review looks worth your time, we'll say what we would look at first. If it doesn't, we'll say that instead.</p></div>
   </div>
 
   <form id="start-form" class="formwrap" method="post" action="/api/start">
@@ -59,6 +59,14 @@ import Base from '../layouts/Base.astro';
       <label class="opt"><input type="radio" name="q5" value="directors"> My directors or partners</label>
       <label class="opt"><input type="radio" name="q5" value="hq"> Regional or head office</label>
       <label class="opt"><input type="radio" name="q5" value="unsure"> Not sure</label>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend><span class="qnum">6</span>In a perfect world, what would you want AI to do for you?</legend>
+      <div class="field">
+        <label for="q6-text">In your words (optional)</label>
+        <textarea id="q6-text" name="q6text"></textarea>
+      </div>
     </fieldset>
 
     <fieldset class="fieldset">
